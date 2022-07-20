@@ -7,7 +7,7 @@ export class TestConsumer implements OnModuleInit {
 
     async onModuleInit() {
         await this.consumerService.consume(
-            { topic: 'test' },
+            { topic: 'test_json' },
             {
                 eachMessage: async ({ topic, partition, message }) => {
                     console.log({
