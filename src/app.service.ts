@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CompressionTypes } from 'kafkajs';
 import { PipelineInfoDTO } from './dto/pipeline-info.dto';
 import { ProducerService } from './kafka/producer.service';
-import { plainToClass } from 'class-transformer'
+import { plainToInstance } from 'class-transformer'
 
 @Injectable()
 export class AppService {
@@ -22,7 +22,8 @@ export class AppService {
   }
 
   async sendPipelineInfo(payload: PipelineInfoDTO[]) {
-    const pipelineInfo = plainToClass(PipelineInfoDTO, payload)
+    const pipelineInfo = plainToInstance(PipelineInfoDTO, payload);
+
     await this.producerService.produce({
       topic: 'test_json',
       messages: [
